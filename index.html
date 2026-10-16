@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trivedi Romit — 3D & Liquid Glass Portfolio</title>
+  <meta name="description" content="3D WebGL and Liquid Glass Portfolio of Trivedi Romit — Full-Stack Developer, AI Systems Engineer, and Visual Technologist." />
+  <meta name="theme-color" content="#05070f" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <!-- Portfolio Scripts -->
+  <script src="js/webgl-scene.js" defer></script>
+  <script src="js/interactions.js" defer></script>
+</head>
+<body>
+
+  <!-- SVG Optical Liquid Refraction Filter -->
+  <svg class="svg-filters" aria-hidden="true">
+    <filter id="liquid-refraction">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <!-- Ambient Liquid Backlights -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Interactive 3D Three.js Canvas -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Floating Liquid Glass Navigation -->
+  <header>
+    <nav class="liquid-glass nav-dock" aria-label="Primary Navigation">
+      <a href="#top" class="brand-logo">
+        <span class="brand-orb"></span>
+        <span>TRIVEDI ROMIT</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#projects" class="nav-link active">Projects</a></li>
+        <li><a href="#studies" class="nav-link">Studies</a></li>
+        <li><a href="#stack" class="nav-link">Stack</a></li>
+        <li><a href="#interests" class="nav-link">Interests</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta-pill">Hire / Collaborate</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO SECTION -->
+    <section class="hero-grid">
+      <div class="liquid-glass hero-main tilt-card">
+        <div>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>B.Tech CSE &bull; Full-Stack, AI Runtimes &amp; 3D WebGL</span>
+          </div>
+          <h1 class="hero-title">
+            Architecting <span class="gradient-text">3D Spatial Web</span> &amp; Intelligent Systems.
+          </h1>
+          <p class="hero-desc">
+            I am <strong>Trivedi Romit</strong>, a Computer Science &amp; Engineering builder crafting high-concurrency Next.js platforms, autonomous local AI engines, and hardware-accelerated 3D liquid glass interfaces.
+          </p>
+        </div>
+
+        <div class="hero-bottom">
+          <div class="cta-group">
+            <a href="#projects" class="btn-glass btn-primary">Explore Engineered Works &rarr;</a>
+            <a href="#studies" class="btn-glass btn-secondary">Academic &amp; Lab Track</a>
+          </div>
+          <div class="quick-specs">
+            <span class="mono-badge">Next.js + TypeScript</span>
+            <span class="mono-badge">Python + Ollama</span>
+            <span class="mono-badge">Three.js + WebGL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="liquid-glass hero-stats tilt-card">
+        <div class="stat-item">
+          <div class="stat-top">
+            <span class="stat-value">6+</span>
+            <span class="stat-tag">Production &amp; Lab</span>
+          </div>
+          <div class="stat-label">Full-Stack, AI Runtime &amp; Native Systems Built</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-top">
+            <span class="stat-value">60 FPS</span>
+            <span class="stat-tag">WebGL Pipeline</span>
+          </div>
+          <div class="stat-label">Real-Time Vertex Displacement &amp; Refractive UI</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-top">
+            <span class="stat-value">Sem V</span>
+            <span class="stat-tag">B.Tech CSE</span>
+          </div>
+          <div class="stat-label">Computer Science &amp; Engineering Specialization</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+      <div class="section-header-row">
+        <div>
+          <span class="section-eyebrow">Engineered Systems</span>
+          <h2 class="section-title">Featured Projects</h2>
+        </div>
+        <div class="filter-bar liquid-glass" role="tablist" aria-label="Filter projects by category">
+          <button class="filter-btn active" data-filter="all">All (6)</button>
+          <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+          <button class="filter-btn" data-filter="ai">AI &amp; Runtimes</button>
+          <button class="filter-btn" data-filter="creative">3D, Brand &amp; Mobile</button>
+        </div>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        <!-- Project 1: PSxRENT -->
+        <article class="liquid-glass project-card tilt-card" data-category="fullstack" data-project-id="psxrent">
+          <div>
+            <div class="project-top">
+              <span class="project-badge">Full-Stack Platform</span>
+              <span class="project-number">01</span>
+            </div>
+            <h3 class="project-title">PSxRENT — Console &amp; Gear Rental Platform</h3>
+            <p class="project-desc">
+              End-to-end gaming console and accessory rental platform featuring dynamic inventory seeding, relational booking schemas, expandable interactive cards, and cloud deployment.
+            </p>
+          </div>
+          <div class="project-footer">
+            <div class="tag-row">
+              <span class="tech-tag">Next.js</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Prisma ORM</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Tailwind CSS</span>
+            </div>
+            <button class="inspect-btn" data-open-modal="psxrent">Inspect Architecture &nearr;</button>
+          </div>
+        </article>
+
+        <!-- Project 2: NEUROVAULT & SYNAPSE -->
+        <article class="liquid-glass project-card tilt-card" data-category="ai" data-project-id="neurovault">
+          <div>
+            <div class="project-top">
+              <span class="project-badge">AI Reasoning Engine</span>
+              <span class="project-number">02</span>
+            </div>
+            <h3 class="project-title">NEUROVAULT &amp; SYNAPSE Core</h3>
+            <p class="project-desc">
+              Local-first AI knowledge vault and reasoning engine engineered for automated claim extraction, semantic contradiction detection, and zero-latency local LLM inference.
+            </p>
+          </div>
+          <div class="project-footer">
+            <div class="tag-row">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Ollama</span>
+              <span class="tech-tag">Qwen 2.5 7B</span>
+              <span class="tech-tag">Knowledge Graph</span>
+            </div>
+            <button class="inspect-btn" data-open-modal="neurovault">Inspect Architecture &nearr;</button>
+          </div>
+        </article>
+
+        <!-- Project 3: Semantic Progress Runtime & DB-Sentry -->
+        <article class="liquid-glass project-card tilt-card" data-category="ai" data-project-id="dbsentry">
+          <div>
+            <div class="project-top">
+              <span class="project-badge">Agent Supervision</span>
+              <span class="project-number">03</span>
+            </div>
+            <h3 class="project-title">Semantic Progress Runtime &amp; DB-Sentry</h3>
+            <p class="project-desc">
+              Autonomous AI agent supervision framework that measures real environment state deltas, prevents infinite reasoning loops, and enforces transactional database safety.
+            </p>
+          </div>
+          <div class="project-footer">
+            <div class="tag-row">
+              <span class="tech-tag">Agent Runtime</span>
+              <span class="tech-tag">State Telemetry</span>
+              <span class="tech-tag">SQL Guardrails</span>
+              <span class="tech-tag">Python</span>
+            </div>
+            <button class="inspect-btn" data-open-modal="dbsentry">Inspect Architecture &nearr;</button>
+          </div>
+        </article>
+
+        <!-- Project 4: Intelligent CCTV Surveillance -->
+        <article class="liquid-glass project-card tilt-card" data-category="ai" data-project-id="vision">
+          <div>
+            <div class="project-top">
+              <span class="project-badge">Computer Vision</span>
+              <span class="project-number">04</span>
+            </div>
+            <h3 class="project-title">Real-Time CCTV Telemetry &amp; YOLOv8 Pipeline</h3>
+            <p class="project-desc">
+              High-throughput video processing system built for hackathon surveillance challenges, executing multi-stream object detection, anomaly alerts, and frame indexing.
+            </p>
+          </div>
+          <div class="project-footer">
+            <div class="tag-row">
+              <span class="tech-tag">YOLOv8</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">Streamlit</span>
+            </div>
+            <button class="inspect-btn" data-open-modal="vision">Inspect Architecture &nearr;</button>
+          </div>
+        </article>
+
+        <!-- Project 5: Nano Banana & Spatial WebGL Identity -->
+        <article class="liquid-glass project-card tilt-card" data-category="creative" data-project-id="nanobanana">
+          <div>
+            <div class="project-top">
+              <span class="project-badge">3D &amp; Brand System</span>
+              <span class="project-number">05</span>
+            </div>
+            <h3 class="project-title">Nano Banana Emblem &amp; 3D Spatial Portfolio</h3>
+            <p class="project-desc">
+              Custom geometric vector logo design, interactive WebGL liquid glass shader pipeline, and immersive roleplay concept architecture for campus-scale showcases.
+            </p>
+          </div>
+          <div class="project-footer">
+            <div class="tag-row">
+              <span class="tech-tag">Three.js</span>
+              <span class="tech-tag">Logo Design</span>
+              <span class="tech-tag">SVG Filters</span>
+              <span class="tech-tag">Spatial UI</span>
+            </div>
+            <button class="inspect-btn" data-open-modal="nanobanana">Inspect Architecture &nearr;</button>
+          </div>
+        </article>
+
+        <!-- Project 6: Native Android Kotlin Suite -->
+        <article class="liquid-glass project-card tilt-card" data-category="creative" data-project-id="android">
+          <div>
+            <div class="project-top">
+              <span class="project-badge">Mobile Engineering</span>
+              <span class="project-number">06</span>
+            </div>
+            <h3 class="project-title">Kotlin JSON-to-SQLite Sync &amp; Media Engine</h3>
+            <p class="project-desc">
+              Native Android Studio applications featuring asynchronous HTTP contact synchronization into local SQLite storage using Kotlin Coroutines and custom MP3 audio playback controls.
+            </p>
+          </div>
+          <div class="project-footer">
+            <div class="tag-row">
+              <span class="tech-tag">Kotlin</span>
+              <span class="tech-tag">Android Studio</span>
+              <span class="tech-tag">Coroutines</span>
+              <span class="tech-tag">SQLite</span>
+            </div>
+            <button class="inspect-btn" data-open-modal="android">Inspect Architecture &nearr;</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- STUDIES / EDUCATION SECTION -->
+    <section id="studies">
+      <div class="section-header">
+        <span class="section-eyebrow">Academic Progression</span>
+        <h2 class="section-title">Studies &amp; Engineering Coursework</h2>
+      </div>
+
+      <div class="timeline-container">
+        <div class="liquid-glass study-card tilt-card">
+          <div class="study-meta">
+            <div class="study-period">B.Tech &bull; Sem V</div>
+            <div class="study-location">Gujarat, India</div>
+          </div>
+          <div>
+            <h3 class="study-degree">Bachelor of Technology in Computer Science &amp; Engineering</h3>
+            <div class="study-school">Core Focus: Distributed Full-Stack Systems, AI Runtimes &amp; Mobile Computing</div>
+            <ul class="study-highlights">
+              <li><strong>Database Management &amp; ORM Systems:</strong> Relational schema normalization, Prisma ORM migrations, PostgreSQL (Neon), and local SQLite persistence.</li>
+              <li><strong>Mobile Application Development Labs:</strong> Native Android UI lifecycles in Kotlin, background threads with Coroutines, `HttpURLConnection` REST ingestion, and media services.</li>
+              <li><strong>Algorithms &amp; System Design:</strong> Graph structures, state-space monitoring for autonomous agents, and low-latency web delivery.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="liquid-glass study-card tilt-card">
+          <div class="study-meta">
+            <div class="study-period">Applied R&amp;D</div>
+            <div class="study-location">Independent Lab</div>
+          </div>
+          <div>
+            <h3 class="study-degree">Local LLM Inference, Computer Vision &amp; 3D Web Graphics</h3>
+            <div class="study-school">Self-Directed Systems Research &amp; Hackathon Engineering</div>
+            <ul class="study-highlights">
+              <li><strong>Quantized Local AI Pipelines:</strong> Deploying and benchmarking Qwen 2.5 Coder 7B via Ollama on consumer RTX hardware for deterministic JSON extraction.</li>
+              <li><strong>Spatial Web &amp; Optical UI:</strong> Combining Three.js physical materials, SVG displacement maps, and 3D CSS perspective matrices for 60 FPS glassmorphic interfaces.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK MATRIX -->
+    <section id="stack">
+      <div class="section-header">
+        <span class="section-eyebrow">Technical Arsenal</span>
+        <h2 class="section-title">Production Stack &amp; Tooling</h2>
+      </div>
+
+      <div class="stack-grid">
+        <div class="liquid-glass stack-card tilt-card">
+          <h3 class="stack-category">Frontend &amp; 3D Spatial</h3>
+          <div class="tag-row">
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Tailwind CSS</span>
+            <span class="tech-tag">Three.js / WebGL</span>
+            <span class="tech-tag">Spline 3D</span>
+          </div>
+        </div>
+
+        <div class="liquid-glass stack-card tilt-card">
+          <h3 class="stack-category">Backend &amp; Databases</h3>
+          <div class="tag-row">
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Prisma ORM</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Neon Serverless</span>
+            <span class="tech-tag">SQLite</span>
+            <span class="tech-tag">REST APIs</span>
+          </div>
+        </div>
+
+        <div class="liquid-glass stack-card tilt-card">
+          <h3 class="stack-category">AI, Vision &amp; Native</h3>
+          <div class="tag-row">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Ollama</span>
+            <span class="tech-tag">Qwen 2.5 Coder</span>
+            <span class="tech-tag">YOLOv8</span>
+            <span class="tech-tag">Streamlit</span>
+            <span class="tech-tag">Kotlin / Android</span>
+          </div>
+        </div>
+
+        <div class="liquid-glass stack-card tilt-card">
+          <h3 class="stack-category">DevOps &amp; Hardware</h3>
+          <div class="tag-row">
+            <span class="tech-tag">Git &amp; GitHub</span>
+            <span class="tech-tag">Vercel CI/CD</span>
+            <span class="tech-tag">RTX 4060 CUDA</span>
+            <span class="tech-tag">Cloudflare DNS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERESTS SECTION -->
+    <section id="interests">
+      <div class="section-header">
+        <span class="section-eyebrow">Beyond the Compiler</span>
+        <h2 class="section-title">Interests &amp; Explorations</h2>
+      </div>
+
+      <div class="interests-grid">
+        <div class="liquid-glass interest-card tilt-card">
+          <div class="interest-icon">&#9876;</div>
+          <h3 class="interest-title">Open-World Action RPGs &amp; Frame Tuning</h3>
+          <p class="interest-text">
+            Analyzing combat telemetry, shader compilation, and driver-level GPU optimization across titles like <em>Wuthering Waves</em>, <em>Where Winds Meet</em>, <em>Genshin Impact</em>, and <em>PUBG</em>.
+          </p>
+        </div>
+
+        <div class="liquid-glass interest-card tilt-card">
+          <div class="interest-icon">&#129504;</div>
+          <h3 class="interest-title">Local LLMs &amp; Autonomous Agents</h3>
+          <p class="interest-text">
+            Running quantized models locally on an RTX 4060 laptop rig, testing contradiction detection engines, and designing supervisor guardrails for AI agents.
+          </p>
+        </div>
+
+        <div class="liquid-glass interest-card tilt-card">
+          <div class="interest-icon">&#10024;</div>
+          <h3 class="interest-title">Logo Systems &amp; Refractive UI</h3>
+          <p class="interest-text">
+            Crafting distinctive brand marks like the <em>Nano Banana</em> emblem and pushing browser rendering limits with 3D liquid glass aesthetics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <div class="liquid-glass contact-panel tilt-card">
+        <span class="section-eyebrow">Direct Channel</span>
+        <h2 class="section-title">Deploy Your Next Idea With Me</h2>
+        <p>
+          Available for full-stack Next.js engineering, custom 3D web interfaces, AI automation pipelines, and collaborative technical projects.
+        </p>
+        <div class="cta-group">
+          <a href="mailto:contact@trivediromit.dev" class="btn-glass btn-primary">Email Trivedi Romit</a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn-glass btn-secondary">GitHub Profile &nearr;</a>
+          <a href="#top" class="btn-glass btn-secondary">Back to Top &uarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Trivedi Romit. Engineered with Three.js WebGL &amp; Optical Liquid Glass. Ready for Vercel.</p>
+  </footer>
+
+  <!-- INTERACTIVE PROJECT ARCHITECTURE MODAL -->
+  <div class="modal-backdrop" id="project-modal" aria-hidden="true">
+    <div class="liquid-glass modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <span class="project-badge" id="modal-badge">Architecture Deep Dive</span>
+        <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <h3 class="modal-title" id="modal-title">Project Title</h3>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-section-label">Key Engineering Highlights</div>
+      <ul class="modal-bullets" id="modal-bullets"></ul>
+      <div class="modal-section-label">Technology Stack</div>
+      <div class="tag-row" id="modal-tags"></div>
+    </div>
+  </div>
+
+</body>
+</html>
